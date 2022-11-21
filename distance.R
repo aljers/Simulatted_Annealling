@@ -1,4 +1,4 @@
-dis<-function(tsp,label) 
+distance<-function(tsp,label) 
 {
   n<-length(label);
   m_dis<-matrix(0,n,n);

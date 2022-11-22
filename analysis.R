@@ -8,14 +8,10 @@ count<-10 ##number of validation of each combination of parameters
 res<-data.frame(idx=1:(27*count),M="",T=0,Iter=0,max_iter=0,min_jl=0,best_iter=0,best_t=0);
 res$M<-as.character(res$M);
 k<-1;##iteration times
-for(m in Method)
-{
-  for(t in T)
-  {
-    for(iter in Iter)
-    {
-      for(i in 1:count) 
-      {
+for(m in Method){
+  for(t in T)  {
+    for(iter in Iter){
+      for(i in 1:count){
         x<-sann(m_dis=m_dis, sq=NULL, 
                 m_iter=1000, t_iter=iter, 
                 t=t, method=m, d_rate=0.97);

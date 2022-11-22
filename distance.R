@@ -1,4 +1,4 @@
-distance<-function(tsp,label) 
+dis<-function(tsp,label) 
 {
   n<-length(label);
   m_dis<-matrix(0,n,n);
@@ -23,4 +23,12 @@ distance<-function(tsp,label)
     }
   }
   return(m_dis);
+}
+
+distance <- function(m_distance, sq){
+  res <- 0
+  for (i in 1:(length(sq)-1)){
+    res <- res + m_distance[sq[i],sq[i+1]]
+  }
+  return(res)
 }

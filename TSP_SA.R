@@ -43,7 +43,7 @@ sann<-function(m_dis,sq=NULL,m_iter=100,t_iter=50,t=100000,method="exp",d_rate=0
         sq<-tmp_sq;
         }
       else{
-        if(exp((jl-tmp_jl)/10*t)>runif(1,0,1)){
+        if(exp((jl-tmp_jl)/5*t)>runif(1,0,1)){
           jl<-tmp_jl;
           sq<-tmp_sq;
           }

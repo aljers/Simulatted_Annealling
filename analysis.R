@@ -23,8 +23,8 @@ for(m in Method)
         res$T[k]<-t;
         res$Iter[k]<-iter;
         res$max_iter[k]<-nrow(x$log)-1;
-        res$min_jl[k]<-x$jl;
-        best_iter<-min(which(x$log$dis==x$jl));
+        res$min_jl[k]<-min(x$log$dis);
+        best_iter<-min(which(x$log$dis==min(x$log$dis)));
         res$best_iter[k]<-best_iter;
         res$best_t[k]<-x$log$t[best_iter];
         k<-k+1;
@@ -38,13 +38,18 @@ t_opt <- res$T[which.min(res$min_jl)]
 
 
 
-C_grid <- seq(0.6,0.95,0.05)
-log <- data.frame()
+C_grid <- seq(0.05,0.95,0.05)
+log <- data.frame(c=C_grid)
 k <- 1
 for (c in C_grid){
   x<-sann(m_dis=m_dis, sq=NULL, 
           m_iter=1000, t_iter=30, 
-          t=5000, method='log', d_rate=c);
-  log <- x
+          t=5000, method='exp', d_rate=c);
+  log$max_iter <- nrow(x$log)-1
+  log$min_jl[k]<-min(x$log$dis)
+  best_iter<-min(which(x$log$dis==min(x$log$dis)));
+  log$best_iter[k]<-best_iter;
+  log$best_t[k]<-x$log$t[best_iter];
+  
   k <- k+1
 }

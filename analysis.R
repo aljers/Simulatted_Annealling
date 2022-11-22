@@ -1,3 +1,6 @@
+#Starting the initializing
+source('setup.R')
+
 T<-c(500,1000,5000) ##initial temperature
 Method<-c("exp","log","rec") ##cooling method
 Iter<-c(10,30,50) ##inner iteration number
@@ -13,7 +16,7 @@ for(m in Method)
     {
       for(i in 1:count) 
       {
-        x<-sann(m_dis=m_dis, sq=sq, 
+        x<-sann(m_dis=m_dis, sq=NULL, 
                 m_iter=1000, t_iter=iter, 
                 t=t, method=m, d_rate=0.97);
         res$M[k]<-m;
@@ -28,4 +31,20 @@ for(m in Method)
       }
     }
   }
+}
+#optimal parameters
+iter_opt <- res$Iter[which.min(res$min_jl)]
+t_opt <- res$T[which.min(res$min_jl)]
+
+
+
+C_grid <- seq(0.6,0.95,0.05)
+log <- data.frame()
+k <- 1
+for (c in C_grid){
+  x<-sann(m_dis=m_dis, sq=NULL, 
+          m_iter=1000, t_iter=30, 
+          t=5000, method='log', d_rate=c);
+  log <- x
+  k <- k+1
 }
